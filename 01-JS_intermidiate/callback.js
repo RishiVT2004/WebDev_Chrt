@@ -1,39 +1,48 @@
 /*
-function addn(n1,n2){
-    return n1+n2;
+function square(n){
+   return n*n;
 }
 
-function subs(n1,n2){
-    return n1-n2;
+function cube(n){
+    return n*n*n;
 }
 
-function operation(a,b){
-    let ob1 = addn(a,b);
-    let ob2 = subs(a,b);
-    console.log(ob1,ob2);
-    return ob1*ob2
+function sumSquare(a,b){
+    let square1 = square(a);
+    let square2 = square(b);
+    return square1 + square2;
 }
 
-let ans = operation(8,4);
-console.log(ans)
+
+function sumCube(a,b){
+    let cube1 = cube(a);
+    let cube2 = cube(b);
+    return cube1+cube2; // Dosen't follow DRY
+}
+
+let ans1 = sumSquare(2,3);
+console.log(ans1)
 */
-
+// example of callback....
 function square(n){
     return n*n;
 }
+ 
 function cube(n){
-  return (n*n*n);
+    return n*n*n;    
 }
 
-function ops(a,b){
-    let x1 = square(a);
-    let y1 = cube(a);
 
-    let x2 = square(b);
-    let y2 = cube(b);
-
-   console.log((x1+y1),(y2+x2));
+function quad(n){
+    return n*n*n*n;    
 }
 
-let z = ops(5,6);
-console.log(z)
+
+function sumofPowers(a,b,pow){ // pow -> 2-> square, 3-> cube ** pow represents the callback 
+    let p1 = pow(a); // passing function as an argument(input)
+    let p2 = pow(b);
+    return p1+p2;
+}
+
+let ans = sumofPowers(3,4,quad);
+console.log(ans);

@@ -1,0 +1,21 @@
+Async -: 
+
+In JavaScript, the async keyword is used to create asynchronous functions, 
+which can pause execution and wait for a promise to settle (resolve or reject) 
+before continuing execution. This allows for writing asynchronous code that looks synchronous,
+making it easier to work with asynchronous operations such as fetching data from a server.
+
+Single-Threaded Nature -: 
+
+JavaScript is single-threaded, meaning it has only one call stack and one memory heap. 
+This means that at any given time, JavaScript can only execute one piece of code. This is in contrast,'
+to multi-threaded languages, where multiple threads can execute code simultaneously.
+
+In JavaScript, the single thread is responsible for executing the code, handling events, 
+and managing callbacks through mechanisms like the event loop. This means that if a piece of code is 
+executing, other code must wait until the current execution is finished before it can run. 
+This is why long-running operations can block the main thread and make the UI unresponsive.
+
+To handle asynchronous operations without blocking the main thread, JavaScript uses features 
+like callbacks, promises, and async/await, which allow code to be executed asynchronously, 
+but still maintain the single-threaded nature of the language.

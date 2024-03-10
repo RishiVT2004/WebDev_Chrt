@@ -1,0 +1,17 @@
+Things to do with Node -> Create HTTP servers*****
+                       -> Create command line interface(CLI), games, etc...
+
+** HTTP server(hyper-text transfer protocol) ** 
+
+-> protocal/instruction defined for machine to communicate.
+-> for web, most common way the Frontend talk to its Backend.(using request and response protocals)
+
+HTTP server -> some code that follows the HTTP protocal and is able to communicate with clients
+
+||  HTTP protocals  ||
+-> the client throws some info at the server -> server does something with that info -> server responds with final result...
+
+-> Arguments : something the client sends
+-> instead calling a function by its name,the client uses a URL(Uniform Resource Locator.)
+-> instead of a function body,the server does something with that request(from client)
+-> instead of function returning a value, the server responds with some data...

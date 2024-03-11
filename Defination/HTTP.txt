@@ -1,0 +1,63 @@
+Things to do with Node -> Create HTTP servers*****
+                       -> Create command line interface(CLI), games, etc...
+
+** HTTP server(hyper-text transfer protocol) ** 
+
+-> protocal/instruction defined for machine to communicate.
+-> for web, most common way the Frontend talk to its Backend.(using request and response protocals)
+
+HTTP server -> some code that follows the HTTP protocal and is able to communicate with clients
+
+||  HTTP protocals  ||
+-> the client throws some info at the server -> server does something with that info -> server responds with final result...
+
+-> Arguments : something the client sends
+-> instead calling a function by its name,the client uses a URL(Uniform Resource Locator.)
+-> instead of a function body,the server does something with that request(from client)
+-> instead of function returning a value, the server responds with some data...
+
+while making HTTP server client needs to think about -:
+1. Protocol(HTTP/HTTPS)
+2. Address(URL/IP/Port)
+3. Route
+4. Header,Body,Query Parameters 
+5. Method
+
+things that server needs to worry about -:
+1. Response Header
+2. Response Body
+3. Status Codes
+
+HTTP(client side) -: eg : https://www.google.com/wikipedia/india
+
+https:// -> Protocol
+www.google.com -> URL
+wikipedia/india -> Route
+
+Header -> cookie(Authorization in inspect element)
+Body -> Request provided 
+Method -> [POST/GET/etc...]
+
+HTTP(server side)
+1. Response header 
+2. Response body -> result of your argument/question
+3. Status Code -> of the request(like ERROR:404)
+
+What happens when we search something in a browser(Interview question)****
+-> Browser passes the URL
+-> Does a DNS loop(converts google.com to an IP) // IP-> how to specify diffrent servers from each other
+ -- DNS -> domain name service --(used to find servers via domains as IP is very hard to find)
+-> Establishes a connection to an IP.
+
+Common Request -> [GET/POST/PUT/DELETE]
+
+Status Codes -: 
+200 -> everything is OK
+403 -> Authentication issue
+404 -> Page/Rourte not exist
+500 -> Internal Server ERROR
+
+
+HTTP Protocol 
+-> Library to be used : ExpressJS
+

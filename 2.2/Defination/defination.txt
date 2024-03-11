@@ -1,0 +1,13 @@
+1. ECMASript -> scripting lang specification on ehich JS is based on. -> serves as guidelines & rules for 
+scripting language design...
+
+2.  Javascript -> most widely used specification of ECMASript(adds additional feature like DOM,setTimeout,fs.ReadFile).
+        js compiler -> V8 -> Chrome(written in C++) | -> compiles JS code to native machine
+                    -> SpiderMonkey -> Firefox      |    code before executing it...
+        ** runs only on browser **
+
+3. NodeJS ->  Created when V8 engine was added with some Backend stuff to create a new runtime 
+          ->  It is a runtime environment of JS 
+
+4. Bun -> Competitor of NodeJS(much faster than NodeJS, written in Zig)
+

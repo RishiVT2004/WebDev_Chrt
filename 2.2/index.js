@@ -19,8 +19,14 @@ app.get('/about',function(req,res){
    });
 })
 
-app.listen(port, function(){
-  console.log(`Example app listening on port ${port}`) // which port is running the server
+app.post('/post', function(req, res){ 
+  msg: 'post request' // sending request -> runs when someone hits your backend servers...
+  console.log(msg);
 })
 
+app.listen(port, function(){
+  console.log(`Example app listening on port ${port}`) // which port is running the server
+});
+
 // create a todo app that lets users store todo on the servers...
+// cover body praser and env variable in middlewares...

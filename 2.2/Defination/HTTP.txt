@@ -55,9 +55,16 @@ Status Codes -:
 200 -> everything is OK
 403 -> Authentication issue
 404 -> Page/Rourte not exist
+411 -> wrong input and incorrect operation
 500 -> Internal Server ERROR
 
 
 HTTP Protocol 
 -> Library to be used : ExpressJS
 
+Request types -: 
+(eg : when you are going for a doctor visit for organ-transplant)
+1. GET - going for consultation to get an organ-transplant
+2. POST - going to get an new organ inserted
+3. PUT - going to get an organ replaced
+4. DELETE - going to get an organ removed

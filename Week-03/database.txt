@@ -1,0 +1,4 @@
+No SQL -> MongoDB -> username: admin_rishi password : rishi2004
+MongoDB url : mongodb+srv://admin_rishi:rishi2004@cluster0.wamdssn.mongodb.net/
+Postgress url : postgresql://cluster0_owner:vaGJm9lfex1U@ep-divine-credit-a5z86on2.us-east-2.aws.neon.tech/cluster0?sslmode=require
+

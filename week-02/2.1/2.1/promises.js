@@ -31,23 +31,22 @@ function PromisifiedTimeout(duration){
 }
 */
 
-function PromisifiedTimeout(duration){
-    const p = new Promise(function(resolve){
-        setTimeout(function(){
-            resolve();  // calling resolve after duration by istantiation as an function in Promise Class
-        },duration) 
+function Promisifed(duration){
+    const p = new Promise(function(resolve){ // p: new Promise(with function(resolve))
+        setTimeout(function(){  //setTimeout -> Promise(function(){resolve()},duration)
+            resolve(); //resolve() is executed in duration time 
+        },duration)
     });
-    return p;
+    return p; //value of p is returned ("executed")
 }
 
-//const ans = PromisifiedTimeout(2000);
-//console.log(ans)  returns -> Promise { <pending> }
+// calling promises -: 
 
-// calling a promise ********* (--IMP--)
-const ans = PromisifiedTimeout(2000);
-ans.then(function(){
-    console.log("SetTimeOut executed ... ") // calls the function within promise and executes the function
+const ans = Promisifed(3000) // duration = 3000
+ans.then(function(){ //calling function inside new Promise(aka : setTimeout())
+    console.log("executed"); // log('executed')==>resolve() ==> value stored in declared promise => p
 })
+
 
 /*
 function PromisifiedTimeout(1000){

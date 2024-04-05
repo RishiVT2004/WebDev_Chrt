@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="getData()"><b>Get Data - Promise<b></button>
+    <button onclick="Data()"><b>Get Data - Async<b></button>
+
+    <script>
+        function getData(){
+            alert('btn clicked')
+            fetch("https://fakerapi.it/api/v1/persons") // by defaults throw get response -> returns promise 
+                .then(function(response){
+                    /*
+                    const data = response.json();
+                    console.log(data) returns promise prending -> data is a promise
+                    */
+                    response.json()
+                    .then(function(Data){
+                        console.log(Data) // status -> ok data gets printed
+                    })
+            });
+
+            
+        }
+
+        async function Data(){
+            const response = await fetch("https://fakerapi.it/api/v1/persons")
+            const FinalData = await response.json()
+            console.log(FinalData)
+        }
+    </script>
+
+</body>
+
+</html>

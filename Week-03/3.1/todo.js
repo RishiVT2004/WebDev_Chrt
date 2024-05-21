@@ -89,6 +89,24 @@ app.post("/post", PostMiddleWare, function (req, res) {
   res.json({ MESSAGE: "Task Added Successfully" });
 });
 
+app.put('/finish',function(req,res){
+
+  let task_searched = req.headers.task_searched;
+  zod_task = zod.string();
+  const validate = zod_task.safeParse(task_searched);
+  for(let i = 0;i<todo.length;i++){
+    if(todo[i].task = validate){
+      if(todo[i].status == "N"){
+        todo[i].status = "Y";
+        res.json("task completed")
+      }else{
+        res.json("task already completed")
+      }
+    }
+  }
+  
+});
+
 app.delete('/finished',PostMiddleWare,function(req,res){
   const finished = [];
   for(let i = 0; i < todo.length; i++){
@@ -115,8 +133,17 @@ app.delete('/unfinished',PostMiddleWare,function(req,res){
   res.json({"Unfinshed Tasks : " : unfinshed})
 });
 
+app.delete('/remove',function(req,res){
+  for(let i = 0;i<todo.length;i++){
+    if(todo[i].status == "Y"){
+      todo.pop();
+      res.json({message : "finished tasks removed"})
+    }else{
+      res.status(404).json("no finished tasks to remove ")
+    }
+  }
+});
+
 app.listen(2001, () => {
   console.log("listening on port 2001");
 });
-
-

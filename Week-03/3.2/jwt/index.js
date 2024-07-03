@@ -28,7 +28,7 @@ const user = [{
 }]
 
 function ifUserExist(username,password){
-    const user_status = false;
+    let user_status = false;
     for(let i = 0;i<user.length;i++){
         if((user[i].username == username ) && (user[i].password == password)){
             user_status =  true;
@@ -54,7 +54,19 @@ app.post('/signin',function(req,res){
 })
 
 app.get('/users',function(req,res){
-
+    const token = req.headers.authorization // auth -> jwt 
+    try{
+        const decoded = jwt.verify(token,password_jwt);
+        const username = decoded.uname
+         return res.json({
+            users : user
+        })
+    }
+    catch(err){
+        return res.status(403).json({
+            error : "invalid token"
+        })
+    }
 });
 
 app.listen(3100);

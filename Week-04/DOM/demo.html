@@ -12,3 +12,33 @@
     <button>Calculate Summation</button>
 </body>
 </html>
+
+// simple calculator (implementing doucment and .getElementById)
+
+<html>
+    <script>
+        function Sum(){
+            const a = document.getElementById("firstNumber").value;
+            const b = document.getElementById("secondNumber").value;
+            const element = document.getElementById("finalSum")
+            element.innerHTML = parseInt(a) + parseInt(b)
+        }
+
+        function Diffrence(){
+            const a = document.getElementById("firstNumber").value;
+            const b = document.getElementById("secondNumber").value;
+            const element = document.getElementById("finalDif")
+            element.innerHTML = parseInt(a) - parseInt(b)
+        }
+    </script>
+    <body>
+
+        <input id = "firstNumber" type="text" placeholder="First Number"><br><br>
+        <input id = "secondNumber" type="text" placeholder="SecondNumber"><br><br>
+
+        <button onclick="Sum()">Calculate Sum</button><br><br>
+        <button onclick="Diffrence()">Calculate Diffrence</button><br><br>
+        <div id="finalSum" style="font-size: xx-large;"></div>
+        <div id="finalDif" style="font-size: xx-large;"></div>
+    </body>
+</html>

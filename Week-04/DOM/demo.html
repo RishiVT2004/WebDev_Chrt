@@ -29,6 +29,22 @@
             const b = document.getElementById("secondNumber").value;
             const element = document.getElementById("finalDif")
             element.innerHTML = parseInt(a) - parseInt(b)
+
+        //method 2 -> hitting a pre-existing baxkend , where the calculations are performed
+          function Sum(){
+            const a = document.getElementById("firstNumber").value;
+            const b = document.getElementById("secondNumber").value;
+    
+            const res = fetch("https://sum-server.100xdevs.com/sum?a=" + a +"&b=" + b); //async call -> connects to A backend server which performs the calculation
+            res.then(function(response){
+                console.log(response)
+                response.text()
+                    .then(function(ans){
+                        //console.log(ans) -> helps to load ans in termainal
+                        document.getElementById("finalSum").innerHTML = ans;
+
+                    })
+            })
         }
     </script>
     <body>

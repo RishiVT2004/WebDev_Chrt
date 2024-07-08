@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    
+    <input oninput="Intrest()" id = "principal" type="text" placeholder="Principal Amount"><br><br>
+    <input oninput="Intrest()" id = "rate" type="text" placeholder="Intrest Rate"><br><br>
+    <input oninput="Intrest()" id = "time" type="text" placeholder="Time Period"><br><br>
+
+    <div id = "intrest"></div>
+</body>
+
+<script>
+
+    async function Intrest(){
+        const principal = document.getElementById("principal").value;
+        const rate = document.getElementById("rate").value;
+        const time = document.getElementById("time").value
+
+        const res = await fetch("https://sum-server.100xdevs.com/interest?principal=" + principal + "&rate=" + rate + "&time=" + time)
+        const ans = await res.text();
+        document.getElementById("intrest").innerHTML = ans
+    }
+
+    let time;
+    function DebounceIntrest(){
+        clearTimeout(time)
+        time = setTimeout(function(){
+            Intrest();
+        },1000)
+    }
+</script>
+</html>

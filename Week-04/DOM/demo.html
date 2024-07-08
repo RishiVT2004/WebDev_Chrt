@@ -1,60 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <input placeholder="Number 1"></input><br><br>
-    <input placeholder="Number 2"></input><br><br>
-
-    <button>Calculate Summation</button>
-</body>
-</html>
-
-// simple calculator (implementing doucment and .getElementById)
-
 <html>
-    <script>
-        function Sum(){
-            const a = document.getElementById("firstNumber").value;
-            const b = document.getElementById("secondNumber").value;
-            const element = document.getElementById("finalSum")
-            element.innerHTML = parseInt(a) + parseInt(b)
-        }
-
-        function Diffrence(){
-            const a = document.getElementById("firstNumber").value;
-            const b = document.getElementById("secondNumber").value;
-            const element = document.getElementById("finalDif")
-            element.innerHTML = parseInt(a) - parseInt(b)
-
-        //method 2 -> hitting a pre-existing baxkend , where the calculations are performed
-          function Sum(){
-            const a = document.getElementById("firstNumber").value;
-            const b = document.getElementById("secondNumber").value;
     
-            const res = fetch("https://sum-server.100xdevs.com/sum?a=" + a +"&b=" + b); //async call -> connects to A backend server which performs the calculation
-            res.then(function(response){
-                console.log(response)
-                response.text()
-                    .then(function(ans){
-                        //console.log(ans) -> helps to load ans in termainal
-                        document.getElementById("finalSum").innerHTML = ans;
-
-                    })
-            })
-        }
-    </script>
     <body>
 
-        <input id = "firstNumber" type="text" placeholder="First Number"><br><br>
-        <input id = "secondNumber" type="text" placeholder="SecondNumber"><br><br>
+        <input oninput="debounceSum()" id = "firstNumber" type="text" placeholder="First Number"><br><br>
+        <input oninput="debounceSum()" id = "secondNumber" type="text" placeholder="SecondNumber"><br><br>
 
-        <button onclick="Sum()">Calculate Sum</button><br><br>
-        <button onclick="Diffrence()">Calculate Diffrence</button><br><br>
-        <div id="finalSum" style="font-size: xx-large;"></div>
-        <div id="finalDif" style="font-size: xx-large;"></div>
+        <div id="finalSum"></div>
     </body>
+
+    <script>
+        //method 1 
+        //function Sum(){
+          //  const a = document.getElementById("firstNumber").value;
+            //const b = document.getElementById("secondNumber").value;
+            //const element = document.getElementById("finalSum")
+            //element.innerHTML = parseInt(a) + parseInt(b)
+        //}
+        
+        //method 2 -> hitting a pre-existing backend , where the calculations are performed 
+    //    function Sum(){
+    //        const a = document.getElementById("firstNumber").value;
+     //       const b = document.getElementById("secondNumber").value;
+     //
+    
+       //     const res = fetch("https://sum-server.100xdevs.com/sum?a=" + a +"&b=" + b); //async call -> connects to A backend server which performs the calculation
+         //   res.then(function(response){ // promise
+           //     console.log(response)
+            //    response.text() // promise 
+             //       .then(function(ans){
+             //           //console.log(ans) -> helps to load ans in termainal
+               //         document.getElementById("finalSum").innerHTML = ans;
+                //})
+            //})
+        //} 
+
+        // method 3 -> (using async await syntax)
+
+        async function Sum(){
+            const a = document.getElementById("firstNumber").value;
+            const b = document.getElementById("secondNumber").value;
+
+            const res = await fetch("https://sum-server.100xdevs.com/sum?a=" + a +"&b=" + b); // sending a backend request 
+            const ans = await res.text();
+            document.getElementById("finalSum").innerHTML = ans; // displaying the request in the frontend
+
+
+        }
+        // method 4 -> debouncing / throtlling -> no button called sum is present ,request goes out automatically 
+        //<input oninput="Sum()" id = "secondNumber" type="text" placeholder="SecondNumber"><br><br>
+        //debouncing -> not sending request immediatly, eg: while typing in the google tab if the usert dosen't type anything
+        // for 1sec , then the backend gives requset for the suggestions based on typed query in the tab.
+
+        // debouncing implementation 
+        let timeout;
+        function debounceSum(){
+            //declay call to Sum untill debounceSum hasn't been called for 1000 ms/1sec 
+            
+            clearTimeout(timeout); //anytime debounceSum is called , clear timeout(old clock) and start the new clock
+            timeout = setTimeout(function(){
+                Sum();
+            },1000);
+          
+
+            // if this is called within 1sec , then cancel the above clock and restart the timeout -> clearClock
+            // if the debounceSum hasn't been called in 1sec then the old clock continues 
+
+        }
+
+
+    </script>
+
 </html>

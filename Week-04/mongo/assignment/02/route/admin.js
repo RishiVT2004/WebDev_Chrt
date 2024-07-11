@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const adminMiddleware = require("../middleware/admin");
-const { Admin, User, Course } = require("../database");
-const {JWT_Secret_pass} = require("../config");
+const { Admin, Course } = require("../database");
+const JWT_Secret_pass = require("../config").JWT_SECRET;
 const router = Router();
 const jwt = require("jsonwebtoken");
 
@@ -28,9 +28,9 @@ router.post('/signin', async (req, res) => {
     const password = req.body.password;
   //  console.log(JWT_Secret_pass);
 
-    const user = await User.find({
-        username,
-        password
+    const user = await Admin.find({
+        username:username,
+        password:password
     })
     if (user) {
         const token = jwt.sign({
@@ -42,7 +42,7 @@ router.post('/signin', async (req, res) => {
         })
     } else {
         res.status(411).json({
-            message: "Incorrect email and pass"
+            message: "Invalid Admin"
         })
     }
 });

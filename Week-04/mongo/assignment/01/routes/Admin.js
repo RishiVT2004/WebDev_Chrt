@@ -2,6 +2,7 @@ const express = require("express")
 const AdminMiddleware = require("../middlewares/Admin")
 const {Admin,Course} = require("../database")
 const router = express.Router();
+const zod = require('zod');
 
 // create a new ADMIN
 router.post('/signup',async (req,res) => {
@@ -9,15 +10,25 @@ router.post('/signup',async (req,res) => {
      const username = req.body.username;
      const password = req.body.password;
 
-    await Admin.create({
-        username: username,
-        password: password
+    const inputSchema  = zod.object({
+        username : zod.string().min(5).max(20),
+        password : zod.string().min(8)
     })
+    
+    const {success} = inputSchema.safeParse({username : username , password : password})
+   // console.log({success});
 
-    res.json({
-        messgae : "Admin Registered Successfully"
-    })
- 
+    if(success){
+        await Admin.create({
+            username: username,
+            password: password
+        })
+        res.json({
+            message : "Admin Registered Successfully"
+        })
+    }else{
+        res.json({message : "invalid input credentials"})
+    }
 });
 
 //creates a NEW COURSE

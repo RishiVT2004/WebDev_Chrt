@@ -39,16 +39,32 @@ router.post('/courses', AdminMiddleware, async (req, res) => { //Admin Middlewar
     const price = req.body.price;
     const imageLink = req.body.imageLink 
 
-    const NewCoures = await Course.create({
-        title,
-        description,
-        price,
-        imageLink
+    // input validation
+
+    const PostSchema = zod.object({
+        title : zod.string().min(10),
+        description : zod.string().min(15).max(100),
+        price : zod.number().min(999),
+        imageLink : zod.string()
     })
+    
+    const {success} = PostSchema.safeParse({title : title , description : description , price : price , imageLink : imageLink})
 
-     // when a data is given to MongoDB an random id is generated -> stored in _.id format
-
-    res.json({message : 'New Course Created Successfully ' , courseId : NewCoures._id })
+    if(success){
+        const NewCoures = await Course.create({
+            title,
+            description,
+            price,
+            imageLink
+        })
+    
+         // when a data is given to MongoDB an random id is generated -> stored in _.id format
+        res.json({message : 'New Course Created Successfully ' , courseId : NewCoures._id })
+    }else{
+        res.json({
+            message : "invalid course credentials ... "
+        })
+    }
 });
 
 router.get('/courses', AdminMiddleware, async (req, res) => { //returns all current created courses

@@ -2,6 +2,8 @@ const { Router } = require("express");
 const router = Router();
 const { User, Course } = require("../database");
 const UserMiddleware = require("../middlewares/User");
+const zod = require('zod');
+
 
 // User Routes
 router.post("/signup", async (req, res) => {
@@ -10,11 +12,23 @@ router.post("/signup", async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  await User.create({
-    username,
-    password,
-  });
-  res.json({ message: "new User Added" });
+  const inputSchema = zod.object({
+    username : zod.string().min(6).max(20),
+    password : zod.string().min(8)
+  })
+
+  const success = inputSchema.safeParse({username : username , password : password})
+
+  if(success){
+    await User.create({
+      username,
+      password,
+    });
+    res.json({ message: "new User Added" });  
+  }else{
+    res.json({message : "invalid user Credentials "})
+  }
+  
 });
 
 router.get("/courses", UserMiddleware, async (req, res) => {

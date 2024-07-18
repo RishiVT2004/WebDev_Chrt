@@ -45,5 +45,13 @@ function CustomButton(state){
     Counter : {state.count}
   </button>
 }
+//   jsx code to return 
+
+//   return React.createElement(
+//     'button' , 
+//       {onClick : onButtonClick},
+//       `Counter : ${state.count}`
+//   );
+// 
 
 export default App

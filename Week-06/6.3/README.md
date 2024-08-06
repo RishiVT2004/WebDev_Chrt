@@ -1,8 +1,20 @@
-# React + Vite
+## Some inportant learnings 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Reconcilation 
+-: react takes the curr state , finding the diff b/w prev and curr state and modifing the dom accordingly ,(this re rendering occures continiously )
+Eg : We need a CA to manage huge amount of money instead managing it ourself 
 
-Currently, two official plugins are available:
+# ReactDOM -:
+contails all the libraries that helps to update and re render the DOM
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# useEffect -:
+dependenct arr = [] => null -> rerender happens only once , else [n] ; n no. of rerendering ,used to prevent infinte re rendering from backend / database 
+
+# useCallBack 
+-> Non necessary , can be performed by use Memo , used for not rendering a child component if funv dosen't need to change across
+
+# UseMemo
+-> we want the crypto and mf returns to not re render{a certain segment of code} when bank data re renders{second segment of code}
+
+# UseRef -: 
+Helps to access & change dom element access , not to be used in ideal cases 

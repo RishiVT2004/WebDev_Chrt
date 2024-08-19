@@ -24,45 +24,63 @@ useRecoilValue -> gives just the value , no updates
 selector - represent a piece of derived state(state which are derived based on some some dependencies) 
 eg : useMemo(() => {
 },[]) 
+
+
+
 */
-
-import { useContext, useMemo, useState } from "react"
-import { RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { countAtom , evenSelector} from "./store/atoms/count";
-
+import { useState } from 'react'
+import { RecoilRoot, useSetRecoilState , useRecoilState , useRecoilValue} from 'recoil'
+import { counterAtom , evenSelector } from './store/atoms/count'
 
 function App() {
-  return (
-    <div>
-      <RecoilRoot>
-        <Count />
-      </RecoilRoot>
-    </div>
+ return(
+  <div>
+    <RecoilRoot>
+      <Counter />
+    </RecoilRoot>
+  </div>
+ )
+}
+
+function Counter(){
+  return(
+  <div>
+    <Header />
+    <CountRenderer />
+    <Button />
+  </div>
   )
 }
 
-function Count() {
-  console.log("re-render");
-  return <div>
-    <CountRenderer />
-    <Buttons />
+
+function Header(){
+  return(<div>
+  <h2>
+    Welcome to the counter Application
+  </h2>
+  <i>
+    <h3>
+      Below is an iteractive counter made with help of recoil
+    </h3>
+  </i>
   </div>
+  )
 }
 
-function CountRenderer() {
-  const count = useRecoilValue(countAtom);
-  
+function CountRenderer(){
+  const count = useRecoilValue(counterAtom);
   return <div>
     <b>
-      {count}
+      counter : {count}
     </b>
-    <evenCountRenderer />
+    <EvenCountRenderer /><br />
   </div>
 }
 
+
 // selectors -> it is even if curr count is even 
-function evenCountRenderer(){
-  /*
+// if num is even return "it is even" else null
+/*
   not optimal way 
 
  const count = useRecoilValue(countAtom)
@@ -72,26 +90,28 @@ function evenCountRenderer(){
 
   */
 
- const isEven = useRecoilValue(evenSelector)
-  // if num is even return "it is even" else null
+function EvenCountRenderer(){
+  const EvenNumber = useRecoilValue(evenSelector);
   return <div>
-  {isEven ? "it is even" : null} 
- </div>
+    {EvenNumber ? "even number " : "odd number"}
+  </div>
 }
 
-function Buttons() {
-  const setCount = useSetRecoilState(countAtom);
-  console.log("buttons re-rendererd"); // re renders only once 
+function Button(){
+  const setCount = useSetRecoilState(counterAtom);
 
   return <div>
     <button onClick={() => {
-      setCount(count => count + 1)
-    }}>Increase</button>
-
+      setCount(count => count + 1)    
+    }}>
+      Increse
+    </button>
     <button onClick={() => {
-      setCount(count => count - 1)
-    }}>Decrease</button>
-  </div>
+        setCount(count => count - 1)
+    }}>
+      Decrese
+    </button>
+  </div> 
 }
 
 export default App
